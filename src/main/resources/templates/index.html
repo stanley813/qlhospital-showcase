@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="/js/jquery.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PACS</title>
+  <style>
+    * {
+      box-sizing: content-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background-color: #4281B9;
+      font-size: 16px;
+      color: #fff;
+    }
+    .flex {
+      display: flex;
+    }
+    .full-size {
+      flex-grow: 1;
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+    .list-item {
+      padding: 0 .5rem .5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .time {
+      position: absolute;
+      right: 3rem;
+      bottom: 1rem;
+      font-size: 1rem;
+    }
+    .header {
+      padding: .8rem;
+      text-align: center;
+      position: relative;
+      font-size: 2rem;
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .main_title {
+
+    }
+    .title {
+      color: #000;
+      text-align: center;
+      padding: 0 .5rem .5rem;
+      justify-content: space-between;
+    }
+    .title_with_num {
+      display: flex;
+    }
+    .title_num {
+      color: red;
+    }
+    .main_title_left {
+      width: 22.8%;
+      min-width: 22.8%;
+    }
+    .main_title_right {
+      flex-grow: 1;
+    }
+    .block {
+      flex-grow: 1;
+    }
+    .block_l {
+      width: 22.8%;
+      min-width: 22.8%;
+      padding: .8rem;
+      flex-direction: column;
+    }
+    .block_c {
+      width: 49.5%;
+      min-width: 49.5%;
+      padding: .8rem;
+      flex-direction: column;
+    }
+    .c_item {
+      flex: 1 1 auto;
+    }
+    .block_r {
+      flex-grow: 1;
+      padding: .8rem;
+      flex-direction: column;
+    }
+    .height1 {
+      height: 28.5%;
+      min-height: 28.5%;
+    }
+    .height2 {
+      height: 32%;
+      min-height: 32%;
+    }
+    .status {
+      padding: 4rem 4rem 4rem .5rem;
+      position: relative;
+    }
+    .status-green::after {
+      position: absolute;
+      display: block;
+      content: '';
+      right:  2rem;
+      top: 50%;
+      margin-top: -6px;
+      width: 12px;
+      height: 12px;
+      background: #6BA644;
+      border-radius: 50%;
+    }
+    .status-red::after {
+      position: absolute;
+      display: block;
+      content: '';
+      right:  2rem;
+      top: 50%;
+      margin-top: -6px;
+      width: 12px;
+      height: 12px;
+      background: #f00;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <div class="header">
+      系统透视图
+      <div class="time">
+        2023.02.23
+      </div>
+    </div>
+    <div class="main_title title flex">
+      <div class="main_title_left">系统分析</div>
+      <div class="main_title_right full-size">设备运行情况</div>
+    </div>
+    <div class="block full-size flex">
+      <div class="block_l flex">
+        <div class="full-size">
+          <div class="title title_with_num">
+            <div>
+              检查总量
+            </div>
+            <div id="verifyAmount" class="title_num">
+              123456
+            </div>
+          </div>
+          <ul>
+            <li class="list-item">
+              <div>检查量</div>
+              <div>123</div>
+            </li>
+            <li class="list-item">
+              <div>检查量</div>
+              <div>123</div>
+            </li>
+          </ul>
+          <div class="title">
+            当日报告系统数据分析
+          </div>
+          <ul>
+            <li class="list-item">
+              <div>报告书</div>
+              <div>123</div>
+            </li>
+            <li class="list-item">
+              <div>检查量</div>
+              <div>123</div>
+            </li>
+          </ul>
+        </div>
+        <div class="height1">
+          <div class="title">
+            当日影像系统数据分析
+          </div>
+          <ul>
+            <li class="list-item">
+              <div>报告书</div>
+              <div>123</div>
+            </li>
+            <li class="list-item">
+              <div>检查量</div>
+              <div>123</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="block_c flex">
+        <div class="full-size flex">
+          <div class="c_item">
+            <div class="title">
+              CT
+            </div>
+            <ul>
+              <li class="list-item">
+                <div>报告书</div>
+                <div>123</div>
+              </li>
+              <li class="list-item">
+                <div>检查量</div>
+                <div>123</div>
+              </li>
+            </ul>
+          </div>
+          <div class="c_item">
+            <div class="title">
+              MR
+            </div>
+            <ul>
+              <li class="list-item">
+                <div>报告书</div>
+                <div>123</div>
+              </li>
+              <li class="list-item">
+                <div>检查量</div>
+                <div>123</div>
+              </li>
+            </ul>
+          </div>
+          <div class="c_item">
+            <div class="title">
+              DX
+            </div>
+            <ul>
+              <li class="list-item">
+                <div>报告书</div>
+                <div>123</div>
+              </li>
+              <li class="list-item">
+                <div>检查量</div>
+                <div>123</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="height2" style="text-align:center;">
+          chart
+        </div>
+      </div>
+      <div class="block_r">
+        <div class="title">服务器监控</div>
+        <ul>
+          <li class="list-item status status-green">
+            <div>
+              AGFF
+            </div>
+            <div>123</div>
+          </li>
+          <li class="list-item status status-red">
+            <div>
+              AGFF
+            </div>
+            <div>123</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<script>
+  $(document).ready(function () {
+      $.ajax({
+            contentType: "application/json",
+            type: "get",
+            url: "/pacs/systemAnalysis",
+            async: false,
+            success: function (result) {
+                alert('123')
+                $("#verifyAmount").html(123)
+            },
+            error: function (request, status, error) {
+                alert()
+            }
+        })
+   });
+
+</script>
+</body>
+</html>
