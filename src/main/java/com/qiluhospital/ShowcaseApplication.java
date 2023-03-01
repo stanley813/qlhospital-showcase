@@ -16,12 +16,4 @@ public class ShowcaseApplication {
         SpringApplication.run(ShowcaseApplication.class, args);
     }
 
-    @Autowired
-    private RestTemplateBuilder builder;
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return builder.build();
-    }
-
 }

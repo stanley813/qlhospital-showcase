@@ -2,38 +2,38 @@ package com.qiluhospital.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
 @Mapper
 public interface PacsMapper {
 
-    public List<Map> annualReportAmount();
+    List<Map> annualReportAmount();
 
-    public Integer totalAmount();
+    Integer totalAmount();
 
-    public List<Map> todayMaxReport();
-    public List<Map> todayMaxVerify();
+    List<Map> todayMaxReport();
 
-    public Integer todayVerifyAmount();
+    List<Map> todayMaxVerify();
 
-    public Integer todayReportAmount();
+    Integer todayVerifyAmount();
 
-    public List<Map> serverMonitor();
+    Integer todayReportAmount();
+
+    List<Map> serverMonitor();
 
 //
-//    public void systemAnalysis();
+//    void systemAnalysis();
 //
-//    public void todayReportAnalysis();
+//    void todayReportAnalysis();
 //
-//    public void serviceMonitor();
+//    void serviceMonitor();
 //
-//    public void annualVerifyAmount();
+//    void annualVerifyAmount();
 //
-//    public void equipmentWorkingStatus();
+//    void equipmentWorkingStatus();
 }
 
 

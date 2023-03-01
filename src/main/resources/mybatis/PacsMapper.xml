@@ -3,21 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qiluhospital.mapper.PacsMapper">
 
-    <select id="annualSystemAnalysis" resultType="map">
-        <!--        select count(1) as amount,extract(year from REPORTTIME) as year from v_report_dc_01-->
-        <!--        group by extract(year from REPORTTIME)-->
-        select count(1) as amount,year from
+    <select id="annualReportAmount" resultType="hashmap">
+        select count(1) as "amount",year as "year" from
         (
         select substr(study_date,1,4) year from dosr_study
         ) a group by year order by year desc
     </select>
 
     <select id="totalAmount" resultType="integer">
-        select count(1) as amount from dosr_study
+        select count(1) as "amount" from dosr_study
     </select>
 
-    <select id="serverMonitor" resultType="map">
-        select serverStatus,amount,a.source_called_title from (
+    <select id="serverMonitor" resultType="hashmap">
+        select serverStatus as "serverStatus",amount as "amount",a.source_called_title as "sourceCalledTitle" from (
 
         select sum(num_objects) serverStatus,source_called_title from study_info group by source_called_title
 
@@ -26,30 +24,30 @@
 
         select count(*) amount,source_called_title from study_info group by source_called_title
 
-        ) on a.source_called_title = b.source_called_title
+        ) b on a.source_called_title = b.source_called_title
     </select>
 
     <select id="todayReportAmount" resultType="integer">
-        select count(1) from v_report_dc_01
+        select count(1) as "amount" from v_report_dc_01
     </select>
 
     <select id="todayVerifyAmount" resultType="integer">
-        select count(1) from v_verify_dc_01
+        select count(1) as "amount" from v_verify_dc_01
     </select>
 
-    <select id="todayMaxReport" resultType="map">
-        select * from (
-        SELECT T.*,row_number() over (partition by modalitytype order by a desc) rn FROM (
-        select modalitytype,reportdoctor_id,count(1) a from v_report_dc_01 group by modalitytype,reportdoctor_id
+    <select id="todayMaxReport" resultType="hashmap">
+        select modalitytype as "modalityType",reportdoctor_id as "reportdoctorId",amount as "amount" from (
+        SELECT T.*,row_number() over (partition by modalitytype order by amount desc) rn FROM (
+        select modalitytype,reportdoctor_id,count(1) amount  from v_report_dc_01 group by modalitytype,reportdoctor_id
         ) T
         )
         where rn = 1
     </select>
 
-    <select id="todayMaxVerify" resultType="map">
-        select * from (
-        SELECT T.*,row_number() over (partition by modalitytype order by a desc) rn FROM (
-        select modalitytype,reportdoctor_id,count(1) a from v_verify_dc_01 group by modalitytype,reportdoctor_id
+    <select id="todayMaxVerify" resultType="hashmap">
+        select modalitytype as "modalityType",verifydoctor_id as "verifydoctorId",amount as "amount" from (
+        SELECT T.*,row_number() over (partition by modalitytype order by amount desc) rn FROM (
+        select modalitytype,verifydoctor_id,count(1) amount from v_verify_dc_01 group by modalitytype,verifydoctor_id
         ) T
         )
         where rn = 1

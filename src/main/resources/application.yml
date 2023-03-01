@@ -4,5 +4,5 @@ spring:
 #    active: production
 #    active: test
   application:
-    name: showcase
+    name: qiluhospital-showcase
 #   password: '123'

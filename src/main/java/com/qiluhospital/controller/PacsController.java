@@ -22,8 +22,8 @@ public class PacsController {
     @GetMapping("systemAnalysis")
     public JSONObject systemAnalysis() {
         log.info("systemAnalysis...");
-//        return pacsService.systemAnalysis();
-        return new JSONObject();
+        return pacsService.systemAnalysis();
+//        return new JSONObject();
     }
 
     /**
