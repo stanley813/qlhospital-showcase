@@ -1,5 +1,6 @@
 package com.qiluhospital.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.qiluhospital.mapper.PacsMapper;
@@ -35,7 +36,38 @@ public class PacsService {
 
     public JSONObject serverMonitor() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("serverMonitor",pacsMapper.serverMonitor());
+        jsonObject.put("serverMonitor", pacsMapper.serverMonitor());
         return jsonObject;
     }
+
+    public List<Map> todayImageData() {
+        return pacsMapper.todayImageData();
+    }
+
+    public JSONObject deviceWorkingStatus() {
+        JSONObject jsonObject = new JSONObject();
+        for (ModalityType value : ModalityType.values()) {
+            jsonObject.put(value.name(), pacsMapper.deviceWorkingStatus(value.name()));
+        }
+        return jsonObject;
+    }
+
+    public JSONObject annualVerify() {
+        JSONObject jsonObject = new JSONObject();
+        List<Map> list = pacsMapper.annualVerify();
+        JSONArray year = new JSONArray();
+        JSONArray amount = new JSONArray();
+        for (Map map : list) {
+            year.add(map.get("year"));
+            amount.add(map.get("amount"));
+        }
+        jsonObject.put("year", year);
+        jsonObject.put("amount", amount);
+        return jsonObject;
+    }
+
+    enum ModalityType {
+        CT, MR, DX;
+    }
+
 }

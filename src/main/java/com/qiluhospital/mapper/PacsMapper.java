@@ -22,7 +22,14 @@ public interface PacsMapper {
 
     Integer todayReportAmount();
 
+    List<Map> todayImageData();
+
     List<Map> serverMonitor();
+
+    List<Map> deviceWorkingStatus(String modalityType);
+
+
+    List<Map> annualVerify();
 
 //
 //    void systemAnalysis();

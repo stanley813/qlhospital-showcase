@@ -1,240 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="/js/jquery.js"></script>
+<script src="/js/echarts.min.4.2.js"></script>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PACS</title>
     <style>
-    * {
-      box-sizing: content-box;
-    }
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      background-color: #4281B9;
-      font-size: 16px;
-      color: #fff;
-    }
-    .flex {
-      display: flex;
-    }
-    .full-size {
-      flex-grow: 1;
-    }
-    ul {
-      padding: 0;
-      margin: 0;
-    }
-    .list-item {
-      padding: 0 .5rem .5rem;
-      display: flex;
-      justify-content: space-between;
-    }
-    .time {
-      position: absolute;
-      right: 3rem;
-      bottom: 1rem;
-      font-size: 1rem;
-    }
-    .header {
-      padding: .8rem;
-      text-align: center;
-      position: relative;
-      font-size: 2rem;
-    }
-    .section {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    .main_title {
+        * {
+            box-sizing: content-box;
+        }
 
-    }
-    .title {
-      color: #000;
-      text-align: center;
-      padding: 0 .5rem .5rem;
-      justify-content: space-between;
-    }
-    .title_with_num {
-      display: flex;
-    }
-    .title_num {
-      color: red;
-    }
-    .main_title_left {
-      width: 22.8%;
-      min-width: 22.8%;
-    }
-    .main_title_right {
-      flex-grow: 1;
-    }
-    .block {
-      flex-grow: 1;
-    }
-    .block_l {
-      width: 22.8%;
-      min-width: 22.8%;
-      padding: .8rem;
-      flex-direction: column;
-    }
-    .block_c {
-      width: 49.5%;
-      min-width: 49.5%;
-      padding: .8rem;
-      flex-direction: column;
-    }
-    .c_item {
-      flex: 1 1 auto;
-    }
-    .block_r {
-      flex-grow: 1;
-      padding: .8rem;
-      flex-direction: column;
-    }
-    .height1 {
-      height: 28.5%;
-      min-height: 28.5%;
-    }
-    .height2 {
-      height: 32%;
-      min-height: 32%;
-    }
-    .status {
-      padding: 4rem 4rem 4rem .5rem;
-      position: relative;
-    }
-    .status-green::after {
-      position: absolute;
-      display: block;
-      content: '';
-      right:  2rem;
-      top: 50%;
-      margin-top: -6px;
-      width: 12px;
-      height: 12px;
-      background: #6BA644;
-      border-radius: 50%;
-    }
-    .status-red::after {
-      position: absolute;
-      display: block;
-      content: '';
-      right:  2rem;
-      top: 50%;
-      margin-top: -6px;
-      width: 12px;
-      height: 12px;
-      background: #f00;
-      border-radius: 50%;
-    }
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: #4281B9;
+            font-size: 16px;
+            color: #fff;
+        }
 
+        .flex {
+            display: flex;
+        }
 
+        .full-size {
+            flex-grow: 1;
+        }
 
+        ul {
+            padding: 0;
+            margin: 0;
+        }
 
+        .list-item {
+            padding: 0 .5rem .5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .time {
+            position: absolute;
+            right: 3rem;
+            bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .header {
+            padding: .8rem;
+            text-align: center;
+            position: relative;
+            font-size: 2rem;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .main_title {}
+
+        .title {
+            color: #000;
+            text-align: center;
+            padding: 0 .5rem .5rem;
+            justify-content: space-between;
+        }
+
+        .title_with_num {
+            display: flex;
+        }
+
+        .title_num {
+            color: red;
+        }
+
+        .main_title_left {
+            width: 22.8%;
+            min-width: 22.8%;
+        }
+
+        .main_title_right {
+            flex-grow: 1;
+        }
+
+        .block {
+            flex-grow: 1;
+        }
+
+        .block_l {
+            width: 22.8%;
+            min-width: 22.8%;
+            padding: .8rem;
+            flex-direction: column;
+        }
+
+        .block_c {
+            width: 49.5%;
+            min-width: 49.5%;
+            padding: .8rem;
+            flex-direction: column;
+        }
+
+        .c_item {
+            flex: 1 1 auto;
+        }
+
+        .block_r {
+            flex-grow: 1;
+            padding: .8rem;
+            flex-direction: column;
+        }
+
+        .height1 {
+            height: 28.5%;
+            min-height: 28.5%;
+        }
+
+        .height2 {
+            height: 50%;
+            min-height: 50%;
+        }
+
+        .status {
+            padding: 4rem 4rem 4rem .5rem;
+            position: relative;
+        }
+
+        .status-green::after {
+            position: absolute;
+            display: block;
+            content: '';
+            right: 2rem;
+            top: 50%;
+            margin-top: -6px;
+            width: 12px;
+            height: 12px;
+            background: #6BA644;
+            border-radius: 50%;
+        }
+
+        .status-red::after {
+            position: absolute;
+            display: block;
+            content: '';
+            right: 2rem;
+            top: 50%;
+            margin-top: -6px;
+            width: 12px;
+            height: 12px;
+            background: #f00;
+            border-radius: 50%;
+        }
     </style>
 </head>
+
 <body>
-<div class="section">
-    <div class="header">
-        系统透视图
-        <div class="time">
-            2023.02.23
-        </div>
-    </div>
-    <div class="main_title title flex">
-        <div class="main_title_left">系统分析</div>
-        <div class="main_title_right full-size">设备运行情况</div>
-    </div>
-    <div class="block full-size flex">
-        <div class="block_l flex">
-            <div class="full-size">
-                <div class="title title_with_num">
-                    <div>
-                        检查总量
-                    </div>
-                    <div id="verifyAmount" class="title_num">
-                        123456
-                    </div>
-                </div>
-                <ul id="annualVerifyAmount">
-                    <li class="list-item">
-                        <div>检查量</div>
-                        <div>123</div>
-                    </li>
-                    <li class="list-item">
-                        <div>检查量</div>
-                        <div>123</div>
-                    </li>
-                </ul>
-                <div class="title">
-                    当日报告系统数据分析
-                </div>
-                <ul>
-                    <li class="list-item">
-                        <div>报告书</div>
-                        <div>123</div>
-                    </li>
-                    <li class="list-item">
-                        <div>检查量</div>
-                        <div>123</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="height1">
-                <div class="title">
-                    当日影像系统数据分析
-                </div>
-                <ul>
-                    <li class="list-item">
-                        <div>报告书</div>
-                        <div>123</div>
-                    </li>
-                    <li class="list-item">
-                        <div>检查量</div>
-                        <div>123</div>
-                    </li>
-                </ul>
+    <div class="section">
+        <div class="header">
+            PACS系统透视图
+            <div id=" time" class="time">
+                <!-- 2023.02.23 -->
             </div>
         </div>
-        <div class="block_c flex">
-            <div class="full-size flex">
-                <div class="c_item">
-                    <div class="title">
-                        CT
+        <div class="main_title title flex">
+            <div class="main_title_left">系统分析</div>
+            <div class="main_title_right full-size">设备运行情况</div>
+        </div>
+        <div class="block full-size flex">
+            <div class="block_l flex">
+                <div class="full-size">
+                    <div class="title title_with_num">
+                        <div>
+                            检查总量
+                        </div>
+                        <div id="verifyAmount" class="title_num"></div>
                     </div>
-                    <ul>
-                        <li class="list-item">
-                            <div>报告书</div>
-                            <div>123</div>
-                        </li>
-                        <li class="list-item">
-                            <div>检查量</div>
-                            <div>123</div>
-                        </li>
+                    <ul id="annualVerifyAmount">
+                    </ul>
+                    <div class="title">
+                        当日报告系统数据分析
+                    </div>
+                    <ul id="todayReportAnalysis">
                     </ul>
                 </div>
-                <div class="c_item">
+                <div class="height1">
                     <div class="title">
-                        MR
-                    </div>
-                    <ul>
-                        <li class="list-item">
-                            <div>报告书</div>
-                            <div>123</div>
-                        </li>
-                        <li class="list-item">
-                            <div>检查量</div>
-                            <div>123</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="c_item">
-                    <div class="title">
-                        DX
+                        当日影像系统数据分析
                     </div>
                     <ul>
                         <li class="list-item">
@@ -248,58 +204,223 @@
                     </ul>
                 </div>
             </div>
-            <div class="height2" style="text-align:center;">
-                chart
+            <div class="block_c flex">
+                <div class="full-size flex">
+                    <div class="c_item">
+                        <div class="title">
+                            CT
+                        </div>
+                        <ul id="deviceCT">
+                        </ul>
+                    </div>
+                    <div class="c_item">
+                        <div class="title">
+                            MR
+                        </div>
+                        <ul id="deviceMR">
+                        </ul>
+                    </div>
+                    <div class="c_item">
+                        <div class="title">
+                            DX
+                        </div>
+                        <ul id="deviceDX">
+                        </ul>
+                    </div>
+                </div>
+                <div id="annualVerifyChart" class="height2" style="text-align:center;">
+                </div>
+            </div>
+            <div class="block_r">
+                <div class="title">服务器监控</div>
+                <ul id="serverMonitor">
+                </ul>
             </div>
         </div>
-        <div class="block_r">
-            <div class="title">服务器监控</div>
-            <ul>
-                <li class="list-item status status-green">
-                    <div>
-                        AGFF
-                    </div>
-                    <div>123</div>
-                </li>
-                <li class="list-item status status-red">
-                    <div>
-                        AGFF
-                    </div>
-                    <div>123</div>
-                </li>
-            </ul>
-        </div>
     </div>
-</div>
-<script>
-  $(document).ready(function () {
-      $.ajax({
-            contentType: "application/json",
-            type: "get",
-            url: "/pacs/systemAnalysis",
-            async: false,
-            success: function (json) {
-                alert(JSON.stringify(json))
-                var html
-                $("#verifyAmount").html(json.totalAmount)
-                for(var item of json.annualVerifyAmount) {
-                    if(item.year){
-                    html+= ' <li class="list-item"><div>'
-                    +item.year+'年</div><div>'+item.amount+'</div></li>'
+    <script>
+
+        $(document).ready(function () {
+
+            showTime();  //上来就显式  先动用这个方法一次
+            setInterval("showTime()", 1000);//间隔多少毫秒执行一次
+
+            $.ajax({
+                contentType: "application/json",
+                type: "get",
+                url: "/pacs/systemAnalysis",
+                async: true,
+                success: function (json) {
+                    console.log(JSON.stringify(json))
+                    var html = ''
+                    $("#verifyAmount").text(json.totalAmount)
+                    var i = 0
+                    for (var item of json.annualVerifyAmount) {
+                        if (i >= 5) break;
+                        if (item.year) {
+                            html += ' <li class="list-item"><div>'
+                                + item.year + '年&nbsp&nbsp</div><div>' + item.amount + '</div></li>'
+                            i += 1
+                        }
                     }
+                    $("#annualVerifyAmount").html(html)
+                },
+                error: function (request, status, error) {
+                    console.log(error)
                 }
-                $("#verifyAmount").html(html)
-            },
-            error: function (request, status, error) {
-                alert()
-            }
-        })
-   });
+            })
+
+            $.ajax({
+                contentType: "application/json",
+                type: "get",
+                url: "/pacs/todayReportAnalysis",
+                async: true,
+                success: function (json) {
+                    console.log(JSON.stringify(json))
+                    var reportArray = json.todayMaxReport
+                    var verifyArray = json.todayMaxVerify
+                    var html = '<li class="list-item"><div>报告总数&nbsp&nbsp</div><div>' + json.todayReportAmount + '</div></li>'
+                    html += '<li class="list-item"><div>审核总数&nbsp&nbsp</div><div>' + json.todayReportAmount + '</div></li>'
+                    for (var i = 0; i < reportArray.length; i++) {
+                        html += '<li class="list-item"><div>' + reportArray[i].modalityType + '报告最多&nbsp&nbsp</div><div>' + reportArray[i].reportdoctorId + '&nbsp&nbsp(' + reportArray[i].amount + ')</div></li>'
+                        html += '<li class="list-item"><div>' + verifyArray[i].modalityType + '审核最多&nbsp&nbsp</div><div>' + verifyArray[i].verifydoctorId + '&nbsp&nbsp(' + verifyArray[i].amount + ')</div></li>'
+                    }
+                    $("#todayReportAnalysis").html(html)
+                },
+                error: function (request, status, error) {
+                    console.log(error)
+                }
+            })
+
+            $.ajax({
+                contentType: "application/json",
+                type: "get",
+                url: "/pacs/deviceWorkingStatus",
+                async: true,
+                success: function (json) {
+                    console.log(JSON.stringify(json))
+                    var CTHtml = '', MRHtml = '', DXHtml = ''
+                    for (var i = 0; i < 10; i++) {
+                        if (json.CT[i])
+                            CTHtml += '<li class="list-item"><div>' + json.CT[i].device + '</div><div>' + json.CT[i].amount + '</div></li>'
+                        if (json.MR[i])
+                            MRHtml += '<li class="list-item"><div>' + json.MR[i].device + '</div><div>' + json.MR[i].amount + '</div></li>'
+                        if (json.DX[i])
+                            DXHtml += '<li class="list-item"><div>' + json.DX[i].device + '</div><div>' + json.DX[i].amount + '</div></li>'
+                    }
+                    $("#deviceCT").html(CTHtml)
+                    $("#deviceMR").html(MRHtml)
+                    $("#deviceDX").html(DXHtml)
+                },
+                error: function (request, status, error) {
+                    console.log(error)
+                }
+            })
 
 
+            $.ajax({
+                contentType: "application/json",
+                type: "get",
+                url: "/pacs/serverMonitor",
+                async: true,
+                success: function (json) {
+                    console.log(JSON.stringify(json))
+                    var serverMonitorHtml = '';
+                    for (var item of json.serverMonitor) {
+                        var status = 'green'
+                        console.log($("#" + item.device));
+                        if ($("#" + item.device).length > 0 && item.serverStatus < $("#serverStatus_" + item.device).text())
+                            status = red
+                        serverMonitorHtml +=
+                            '<li class="list-item status status-' + status + '"><div id="'
+                            + item.device + '">'
+                            + item.device + '</div><div>'
+                            + item.amount + '</div><p id="serverStatus_"'
+                            + item.device + ' hidden>'
+                            + item.serverStatus + '</p></li>'
+                    }
+                    $("#serverMonitor").html(serverMonitorHtml)
+
+                },
+                error: function (request, status, error) {
+                    console.log(error)
+                }
+            })
 
 
+            $.ajax({
+                contentType: "application/json",
+                type: "get",
+                url: "/pacs/annualVerifyAmount",
+                async: true,
+                success: function (json) {
+                    console.log(JSON.stringify(json))
+                    var chart = echarts.init(document.getElementById('annualVerifyChart'));
+                    var option = {
+                        xAxis: {
+                            type: 'category',
+                            data: json.year
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [{
+                            data: json.amount,
+                            type: 'line',
+                            smooth: true
+                        }]
+                    };
+                    chart.setOption(option)
+                    chart.resize()
+                },
+                error: function (request, status, error) {
+                    console.log(error)
+                }
+            })
+        });
 
-</script>
+        function showTime() {
+            var dateTime = new Date();
+            var year = dateTime.getFullYear();   //获取年份
+            var month = dateTime.getMonth();    //获取月份
+            month = month < 10 ? "0" + month : month;  //月份小于10则前面加个"0"
+            var date = dateTime.getDate();    //获取日
+            date = date < 10 ? "0" + date : date;
+            var hour = dateTime.getHours();        //获取小时
+            hour = hour < 10 ? "0" + hour : hour;
+            var minute = dateTime.getMinutes();  //获取分钟
+            minute = minute < 10 ? "0" + minute : minute;
+            var second = dateTime.getSeconds();   //获取秒
+            second = second < 10 ? "0" + second : second;
+            var day = dateTime.getDay()
+            var week = getWeek(day);
+            //年月日时分秒赋值给dateTime
+            dateTime = year + "年" + month + "月" + date + "日" + "" + week + "" + hour + ":" + minute + ":" + second;
+            document.getElementById("time").innerHTML = dateTime;
+        }
+
+        function getWeek(option) {
+            // switch(option){
+            //     case 0:
+            //     return "星期天";
+            //     case 1:
+            //     return "星期一";
+            //     case 2:
+            //     return "星期二";
+            //     case 3:
+            //     return "星期三";
+            //     case 4:
+            //     return "星期四";
+            //     case 5:
+            //     return "星期五";
+            //     case 6:
+            //     return "星期六";                    
+            // }
+            //简单方式获取星期几
+            var week = "日一二三四五六".charAt(option); //获取星期几
+            return "星期" + week;  //返回星期几
+        }
+    </script>
 </body>
+
 </html>

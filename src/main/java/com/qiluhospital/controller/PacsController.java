@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/pacs")
 @Slf4j
@@ -21,7 +24,7 @@ public class PacsController {
      */
     @GetMapping("systemAnalysis")
     public JSONObject systemAnalysis() {
-        log.info("systemAnalysis...");
+//        log.info("systemAnalysis...");
         return pacsService.systemAnalysis();
 //        return new JSONObject();
     }
@@ -31,33 +34,40 @@ public class PacsController {
      */
     @GetMapping("todayReportAnalysis")
     public JSONObject todayReportAnalysis() {
-        log.info("todayReportAnalysis...");
+//        log.info("todayReportAnalysis...");
         return pacsService.todaySystemData();
+    }
+
+    @GetMapping("todayImageData")
+    public List<Map> todayImageData() {
+//        log.info("todayReportAnalysis...");
+        return pacsService.todayImageData();
     }
 
     /**
      * 服务器监控
      */
-    @GetMapping("serviceMonitor")
-    public JSONObject serviceMonitor() {
-        log.info("serviceMonitor...");
+    @GetMapping("serverMonitor")
+    public JSONObject serverMonitor() {
+//        log.info("serviceMonitor...");
         return pacsService.serverMonitor();
-    }
-
-    /**
-     * 年检查量
-     */
-    @GetMapping("annualVerifyAmount")
-    public void annualVerifyAmount() {
-        System.out.println(123);
     }
 
     /**
      * 设备运行情况
      */
-    @GetMapping("equipmentWorkingStatus")
-    public void equipmentWorkingStatus() {
-        System.out.println(123);
+    @GetMapping("deviceWorkingStatus")
+    public JSONObject deviceWorkingStatus() {
+        return pacsService.deviceWorkingStatus();
     }
+
+    /**
+     * 年检查量chart
+     */
+    @GetMapping("annualVerifyAmount")
+    public JSONObject annualVerifyAmount() {
+        return pacsService.annualVerify();
+    }
+
 
 }

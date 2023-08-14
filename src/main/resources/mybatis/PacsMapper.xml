@@ -15,7 +15,7 @@
     </select>
 
     <select id="serverMonitor" resultType="hashmap">
-        select serverStatus as "serverStatus",amount as "amount",a.source_called_title as "sourceCalledTitle" from (
+        select serverStatus as "serverStatus",amount as "amount",a.source_called_title as "device" from (
 
         select sum(num_objects) serverStatus,source_called_title from study_info group by source_called_title
 
@@ -36,20 +36,50 @@
     </select>
 
     <select id="todayMaxReport" resultType="hashmap">
+        select a.*,b.name as "name" from (
         select modalitytype as "modalityType",reportdoctor_id as "reportdoctorId",amount as "amount" from (
         SELECT T.*,row_number() over (partition by modalitytype order by amount desc) rn FROM (
-        select modalitytype,reportdoctor_id,count(1) amount  from v_report_dc_01 group by modalitytype,reportdoctor_id
+        select modalitytype,reportdoctor_id,count(1) amount from v_report_dc_01 group by modalitytype,reportdoctor_id
         ) T
         )
         where rn = 1
+        ) a left join role_employee b on a."reportdoctorId" = b.id_extension
+
     </select>
 
     <select id="todayMaxVerify" resultType="hashmap">
+        select a.*,b.name as "name" from (
+
         select modalitytype as "modalityType",verifydoctor_id as "verifydoctorId",amount as "amount" from (
         SELECT T.*,row_number() over (partition by modalitytype order by amount desc) rn FROM (
         select modalitytype,verifydoctor_id,count(1) amount from v_verify_dc_01 group by modalitytype,verifydoctor_id
         ) T
         )
         where rn = 1
+        ) a left join role_employee b on a."verifydoctorId" = b.id_extension
+    </select>
+
+    <select id="todayImageData" resultType="hashmap">
+        select count(1) as "amount",'ALL' as "modality" from study_info
+        union all
+        select count(1) as "amount",modality as "modality" from study_info group by modality
+        order by "amount" desc
+    </select>
+
+    <select id="deviceWorkingStatus" resultType="hashmap" parameterType="string">
+        select * from (
+        select source_calling_title as "device",count(1) as "amount" from study_info
+        where modality = #{modalityType}
+        group by source_calling_title
+        )
+        order by "amount" desc
+    </select>
+
+    <select id="annualVerify" resultType="hashmap">
+        select "year",count(1) as "amount" from
+        (
+        select substr(study_date,1,4) as "year" from dosr_study
+        where study_date is not null
+        ) group by "year" order by "year"
     </select>
 </mapper>
